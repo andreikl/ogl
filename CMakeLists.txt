@@ -4,6 +4,13 @@ project (ogl)
 
 find_package(OpenGL REQUIRED)
 
+#set(CMAKE_BINARY_DIR
+#    ${CMAKE_SOURCE_DIR}/Build
+#)
+
+message( ${CMAKE_SOURCE_DIR} )
+message( ${CMAKE_BINARY_DIR} )
+
 if( CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR )
     message( FATAL_ERROR "Please select another Build Directory." )
 endif()

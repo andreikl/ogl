@@ -1,1 +1,2 @@
-build
+build/**/*.*
+!build/generate_project.bat
