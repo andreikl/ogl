@@ -5,5 +5,7 @@ public:
     static Application* Create();
 
 protected:
-    virtual int draw();
+    virtual void draw();
+    virtual void initWorld();
+    virtual void dispose();
 };
