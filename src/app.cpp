@@ -11,9 +11,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 // user includes
+#include "inputBase.h"
 #include "app.h"
-
-GLFWwindow* window;
 
 Application::Application() {
 }
@@ -27,6 +26,9 @@ void Application::run() {
         // Clear the screen.
         glClear(GL_COLOR_BUFFER_BIT);
 
+		if (this->input) {
+			this->input->handle(*this);
+		}
         this->draw();
 
         // Swap buffers
@@ -73,8 +75,18 @@ void Application::initApplication() {
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
+	//glfwPollEvents();
+
     // Dark blue background
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+
+	// Enable depth test
+	glEnable(GL_DEPTH_TEST);
+	// Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
+
+	// Cull triangles which normal is not towards the camera
+	//glEnable(GL_CULL_FACE);
 }
 
 void Application::initWorld() {

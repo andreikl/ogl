@@ -1,6 +1,7 @@
 // Include GLEW
 #include <GL/glew.h>
 
+#include "inputOrbit.h"
 #include "tutorial1.h"
 
 GLuint programID;
@@ -14,6 +15,7 @@ Application* Tutorial1::Create() {
 }
 
 void Tutorial1::draw() {
+
     glUseProgram(programID);
 
     // 1rst attribute buffer : vertices
@@ -36,6 +38,8 @@ void Tutorial1::draw() {
 
 void Tutorial1::initWorld() {
     Application::initWorld();
+
+	auto input = new InputOrbit();
 
     glGenVertexArrays(1, &vertexArrayID);
     glBindVertexArray(vertexArrayID);

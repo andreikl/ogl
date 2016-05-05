@@ -7,14 +7,24 @@
 // Include GLM
 #include <glm/glm.hpp>
 
+class InputBase;
+
 class Application {
 public:
     Application();
     virtual ~Application();
-    /**
-    * runs app cycle
-    */
-    void run();
+
+	/**
+	* runs app cycle
+	*/
+	void run();
+
+	/**
+	* Get window instance
+	*/
+	GLFWwindow* getWindow() const {
+		return window;
+	};
 
 protected:
     /**
@@ -28,6 +38,14 @@ protected:
     */
     glm::mat4 projection = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
+	/**
+	* input controller
+	*/
+	InputBase* input = NULL;
+	/**
+	* window instance
+	*/
+	GLFWwindow* window;
 
 protected:
     /**

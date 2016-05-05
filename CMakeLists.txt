@@ -50,6 +50,8 @@ add_definitions(
 add_executable(ogl 
     src/app.cpp
     src/main.cpp
+    src/inputBase.cpp
+    src/inputOrbit.cpp
 
     src/tutorial1/tutorial1.cpp
     src/SimpleVertexShader.vertexshader
