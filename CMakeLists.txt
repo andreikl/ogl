@@ -20,6 +20,11 @@ endif()
 # Compile external dependencies 
 add_subdirectory (external)
 
+cmake_policy(SET CMP0026 OLD)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/external/rpavlik-cmake-modules-fe2273")
+include(CreateLaunchers)
+include(MSVCMultipleProcessCompile) # /MP
+
 include_directories(
     external/glfw-3.1.2/include/GLFW/
     external/glew-1.13.0/include/
@@ -45,8 +50,17 @@ add_definitions(
 add_executable(ogl 
     src/app.cpp
     src/main.cpp
+
     src/tutorial1/tutorial1.cpp
+    src/SimpleVertexShader.vertexshader
+    src/SimpleFragmentShader.fragmentshader
 )
+
 target_link_libraries(ogl
     ${ALL_LIBS}
 )
+
+set_target_properties(ogl PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+create_target_launcher(ogl WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/")
+
+SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
