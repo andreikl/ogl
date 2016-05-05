@@ -1,4 +1,5 @@
 build/**/*.*
-!build/generate_project.bat
+!build/generate_vs2013.bat
+!build/generate_vs2015.bat
 
 CMakeFiles/**/*.*
