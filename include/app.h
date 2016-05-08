@@ -20,10 +20,25 @@ public:
 	void run();
 
 	/**
-	* Get window instance
+	* Get window instance and size of the window
 	*/
 	GLFWwindow* getWindow() const {
 		return window;
+	};
+	int getWidth() const {
+		return width;
+	};
+	int getHeight() const {
+		return height;
+	};
+
+// gets and sets view camera
+public:
+	glm::mat4 getView() const {
+		return this->view;
+	};
+	void setView(glm::mat4 view) {
+		this->view = view;
 	};
 
 protected:
@@ -31,8 +46,8 @@ protected:
     * settings of the application window.
     */
     const char* title = "Ogl";
+	int width = 768;
     int height = 1024;
-    int width = 768;
     /**
     * world matrices
     */

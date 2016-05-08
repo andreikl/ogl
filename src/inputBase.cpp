@@ -1,4 +1,4 @@
 #include "inputBase.h"
 
-InputBase::InputBase() {
+InputBase::InputBase(Application & app):app(app) {
 }

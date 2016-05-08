@@ -27,7 +27,7 @@ void Application::run() {
         glClear(GL_COLOR_BUFFER_BIT);
 
 		if (this->input) {
-			this->input->handle(*this);
+			this->input->handle();
 		}
         this->draw();
 
@@ -81,9 +81,9 @@ void Application::initApplication() {
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
 	// Enable depth test
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 	// Accept fragment if it closer to the camera than the former one
-	glDepthFunc(GL_LESS);
+	//glDepthFunc(GL_LESS);
 
 	// Cull triangles which normal is not towards the camera
 	//glEnable(GL_CULL_FACE);
@@ -94,13 +94,6 @@ void Application::initWorld() {
     this->projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
     // Or, for an ortho camera :
     //this->projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 100.0f); // In world coordinates
-
-    // Camera matrix
-    this->view = glm::lookAt(
-        glm::vec3(4, 3, 3), // Camera is at (4,3,3), in World Space
-        glm::vec3(0, 0, 0), // and looks at the origin
-        glm::vec3(0, 1, 0));  // Head is up (set to 0,-1,0 to look upside-down)
-
 }
 
 void Application::dispose() {

@@ -5,6 +5,8 @@
 #include "tutorial1.h"
 
 GLuint programID;
+GLuint matrixID;
+
 GLuint vertexbuffer;
 GLuint vertexArrayID;
 
@@ -17,6 +19,10 @@ Application* Tutorial1::Create() {
 void Tutorial1::draw() {
 
     glUseProgram(programID);
+
+	glm::mat4 mvp = projection * view;
+	// ser transformation matrix to the "MVP" uniform
+	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);
@@ -39,19 +45,21 @@ void Tutorial1::draw() {
 void Tutorial1::initWorld() {
     Application::initWorld();
 
-	auto input = new InputOrbit();
+	input = InputOrbit::create(*this, 3);
 
     glGenVertexArrays(1, &vertexArrayID);
     glBindVertexArray(vertexArrayID);
 
     // Create and compile our GLSL program from the shaders
-    this->loadShaders("SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader");
+	programID = this->loadShaders("SimpleTransform.vertexshader", "SingleColor.fragmentshader");
+	// Get a handle for our "MVP" uniform
+	matrixID = glGetUniformLocation(programID, "MVP");
+
     static const GLfloat g_vertex_buffer_data[] = {
         -1.0f, -1.0f, 0.0f,
         1.0f, -1.0f, 0.0f,
         0.0f, 1.0f, 0.0f,
     };
-
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
