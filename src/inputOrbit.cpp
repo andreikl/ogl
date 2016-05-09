@@ -66,7 +66,7 @@ void InputOrbit::handle() {
 		auto deltay = this->my - posy;
 		// calculates rotate factor
 		auto rfx = deltax / this->app.getWidth();
-		auto rfy = deltax / this->app.getHeight();
+		auto rfy = deltay / this->app.getHeight();
 		// calculates angle
 		auto ax = 2 * PI * rfx;
 		auto ay = 2 * PI * rfy;
@@ -74,7 +74,7 @@ void InputOrbit::handle() {
 		this->rx += ax;
 		this->ry -= ay;
 
-		std::cout << "handle: anglex: " << ax << ", " << rx << ", angley: " << ay << ", " << ry << std::endl;
+		//std::cout << "handle: anglex: " << ax << ", " << rx << ", angley: " << ay << ", " << ry << std::endl;
 
 		this->update();
 	} else if (GLFW_PRESS == glfwGetMouseButton(app.getWindow(), GLFW_MOUSE_BUTTON_RIGHT)) {
@@ -96,17 +96,18 @@ void InputOrbit::update() {
 	auto x = r * sin(this->rx) * cos(this->ry);
 	auto y = r * sin(this->ry);
 	auto z = r * cos(this->rx) * cos(this->ry);
-	//if (this->ry < PI / 2 && this->ry > -PI / 2) {
+	std::cout << "update: x: " << x << ", y: " << y << ", z: " << z << std::endl;
+	if (this->ry < PI / 2 && this->ry > -PI / 2) {
 		app.setView(glm::lookAt(
 			glm::vec3(x, y, z), // Camera position in World Space
 			glm::vec3(0, 0, 0), // looks position
 			glm::vec3(0, 1, 0) // Head vector
 		));  
-	//} else {
-	//	app.setView(glm::lookAt(
-	//		glm::vec3(x, y, z), // Camera position in World Space
-	//		glm::vec3(0, 0, 0), // looks position
-	//		glm::vec3(0, 1, 0) // Head vector
-	//	));
-	//}
+	} else {
+		app.setView(glm::lookAt(
+			glm::vec3(x, y, z), // Camera position in World Space
+			glm::vec3(0, 0, 0), // looks position
+			glm::vec3(0, -1, 0) // Head vector
+		));
+	}
 }
