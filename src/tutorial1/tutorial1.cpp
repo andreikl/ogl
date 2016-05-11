@@ -1,7 +1,16 @@
 // Include GLEW
 #include <GL/glew.h>
 
+// Include GLFW
+#include <glfw3.h>
+
+// Include GLM
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#include "core.h"
 #include "inputOrbit.h"
+
 #include "tutorial1.h"
 
 GLuint programID;
@@ -14,6 +23,29 @@ Application* Tutorial1::Create() {
     auto tutorial1 = new Tutorial1();
     tutorial1->init();
     return tutorial1;
+}
+
+void Tutorial1::initWorld() {
+    Application::initWorld();
+
+    input = InputOrbit::create(*this, 3);
+
+    glGenVertexArrays(1, &vertexArrayID);
+    glBindVertexArray(vertexArrayID);
+
+    // Create and compile our GLSL program from the shaders
+    programID = loadShaders("SimpleTransform.vertexshader", "SingleColor.fragmentshader");
+    // Get a handle for our "MVP" uniform
+    matrixID = glGetUniformLocation(programID, "MVP");
+
+    static const GLfloat g_vertex_buffer_data[] = {
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f,
+        0.0f, 1.0f, 0.0f,
+    };
+    glGenBuffers(1, &vertexbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 }
 
 void Tutorial1::draw() {
@@ -40,29 +72,6 @@ void Tutorial1::draw() {
     glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 
     glDisableVertexAttribArray(0);
-}
-
-void Tutorial1::initWorld() {
-    Application::initWorld();
-
-	input = InputOrbit::create(*this, 3);
-
-    glGenVertexArrays(1, &vertexArrayID);
-    glBindVertexArray(vertexArrayID);
-
-    // Create and compile our GLSL program from the shaders
-	programID = this->loadShaders("SimpleTransform.vertexshader", "SingleColor.fragmentshader");
-	// Get a handle for our "MVP" uniform
-	matrixID = glGetUniformLocation(programID, "MVP");
-
-    static const GLfloat g_vertex_buffer_data[] = {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-    };
-    glGenBuffers(1, &vertexbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 }
 
 void Tutorial1::dispose() {

@@ -12,7 +12,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "config.h"
+#include "core.h"
 #include "app.h"
 #include "inputOrbit.h"
 
@@ -42,7 +42,7 @@ void InputOrbit::init() {
 		//std::cout << button << " " << action << " " << mods << std::endl;
 	});
 
-	glfwSetScrollCallback(this->app.getWindow(), [] (auto window, auto xoffset, auto yoffset) {
+    glfwSetScrollCallback(this->app.getWindow(), [] (GLFWwindow* window, double xoffset, double yoffset) {
 		if (yoffset > 0) {
 			that->sf += 0.1;
 			that->update();

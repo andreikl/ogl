@@ -50,12 +50,16 @@ add_definitions(
 add_executable(ogl 
     src/app.cpp
     src/main.cpp
+    src/core.cpp
     src/inputBase.cpp
     src/inputOrbit.cpp
+    src/bodyBase.cpp
+    src/rigidBase.cpp
+    src/point.cpp
 
     src/tutorial1/tutorial1.cpp
-    src/SimpleVertexShader.vertexshader
-    src/SimpleFragmentShader.fragmentshader
+    src/SimpleTransform.vertexshader
+    src/SingleColor.fragmentshader
 )
 
 target_link_libraries(ogl

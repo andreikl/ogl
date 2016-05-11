@@ -1,12 +1,5 @@
 class Application;
 
-enum Status: int {
-	NONE = 0,
-	ROTATE = 1,
-	ZOOM = 2,
-	TRANSLATE = 4
-};
-
 class InputBase {
 // constructors and destructors
 public:
@@ -20,5 +13,4 @@ public:
 // variables
 protected:
 	Application & app;
-	int status = Status::NONE;
 };
