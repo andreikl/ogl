@@ -8,12 +8,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "point.h"
+#include "particle.h"
 #include "inputOrbit.h"
 
 #include "tutorial1.h"
 
-PointBase* point;
+ParticleBase* particle;
 
 Application* Tutorial1::Create() {
     auto tutorial1 = new Tutorial1();
@@ -25,16 +25,16 @@ void Tutorial1::initWorld() {
     Application::initWorld();
 
     input = InputOrbit::create(*this, 3);
-    point = PointSphere::Create();
+    particle = ParticleSphere::Create();
 }
 
 void Tutorial1::draw() {
-    point->draw(*this);
+    particle->draw(*this);
 }
 
 void Tutorial1::dispose() {
     Application::dispose();
 
-    delete point;
+    delete particle;
     delete input;
 }

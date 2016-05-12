@@ -11,26 +11,26 @@
 #include <glm/glm.hpp>
 
 #include "app.h"
-#include "point.h"
+#include "particle.h"
 
 // PointBase -----------------
-PointBase::PointBase() {
+ParticleBase::ParticleBase() {
 }
 
-PointBase::~PointBase() {
+ParticleBase::~ParticleBase() {
 }
 
 // PointSphere ---------------
-PointSphere::PointSphere() {
+ParticleSphere::ParticleSphere() {
 }
 
-PointSphere::~PointSphere() {
+ParticleSphere::~ParticleSphere() {
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &elementbuffer);
 }
 
-PointBase* PointSphere::Create(int columns, int rows) {
-    PointSphere* p = new PointSphere();
+ParticleBase* ParticleSphere::Create(int columns, int rows) {
+    ParticleSphere* p = new ParticleSphere();
 
     // top vertex
     p->vertices.push_back(Vector3(0.0, 1.0, 0.0));
@@ -94,7 +94,7 @@ PointBase* PointSphere::Create(int columns, int rows) {
     return p;
 }
 
-void PointSphere::init() {
+void ParticleSphere::init() {
     //glGenVertexArrays(1, &vertexArrayID);
     //glBindVertexArray(vertexArrayID);
 
@@ -113,7 +113,7 @@ void PointSphere::init() {
     glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(short), indices.data(), GL_STATIC_DRAW);
 }
 
-void PointSphere::draw(const Application& app) {
+void ParticleSphere::draw(const Application& app) {
 
     glUseProgram(programID);
 

@@ -55,7 +55,7 @@ add_executable(ogl
     src/inputOrbit.cpp
     src/bodyBase.cpp
     src/rigidBase.cpp
-    src/point.cpp
+    src/particle.cpp
 
     src/tutorial1/tutorial1.cpp
     src/SimpleTransform.vertexshader

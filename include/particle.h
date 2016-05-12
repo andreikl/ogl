@@ -5,11 +5,11 @@
 class Application;
 
 // physic point with rotation and mass that contains relative mesh of vertices
-class PointBase {
+class ParticleBase {
 // constructors and destructors
 public:
-    PointBase();
-    virtual ~PointBase();
+    ParticleBase();
+    virtual ~ParticleBase();
 
 public:
     void virtual init() = 0;
@@ -21,12 +21,12 @@ protected:
     std::vector<unsigned short> indices;
 };
 
-class PointSphere: PointBase {
+class ParticleSphere : ParticleBase {
 // constructors and destructors
 public:
-    PointSphere();
-    ~PointSphere();
-    static PointBase* Create(int columns = 10, int rows = 5);
+    ParticleSphere();
+    ~ParticleSphere();
+    static ParticleBase* Create(int columns = 10, int rows = 5);
 
 public:
     void virtual init();
