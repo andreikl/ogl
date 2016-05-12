@@ -13,7 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 // user includes
-#include "inputBase.h"
+#include "input.h"
 #include "app.h"
 
 Application::Application() {

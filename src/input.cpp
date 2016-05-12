@@ -14,8 +14,13 @@
 
 #include "core.h"
 #include "app.h"
-#include "inputOrbit.h"
+#include "input.h"
 
+// InputBase
+InputBase::InputBase(Application & app): app(app) {
+}
+
+// InputOrbit
 InputOrbit* that = nullptr;
 
 InputOrbit::InputOrbit(Application & app): InputBase(app) {

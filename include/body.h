@@ -5,11 +5,11 @@
 class Application;
 
 // physic point with rotation and mass that contains relative mesh of vertices
-class ParticleBase {
+class RigidBodyBase {
 // constructors and destructors
 public:
-    ParticleBase();
-    virtual ~ParticleBase();
+    RigidBodyBase();
+    virtual ~RigidBodyBase();
 
 public:
     void virtual init() = 0;
@@ -21,12 +21,12 @@ protected:
     std::vector<unsigned short> indices;
 };
 
-class ParticleSphere : ParticleBase {
+class RigidBodySphere : RigidBodyBase {
 // constructors and destructors
 public:
-    ParticleSphere();
-    ~ParticleSphere();
-    static ParticleBase* Create(int columns = 10, int rows = 5);
+    RigidBodySphere();
+    ~RigidBodySphere();
+    static RigidBodyBase* Create(int columns = 10, int rows = 5);
 
 public:
     void virtual init();

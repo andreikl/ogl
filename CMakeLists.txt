@@ -48,14 +48,11 @@ add_definitions(
 )
 
 add_executable(ogl 
+    src/core.cpp
     src/app.cpp
     src/main.cpp
-    src/core.cpp
-    src/inputBase.cpp
-    src/inputOrbit.cpp
-    src/bodyBase.cpp
-    src/rigidBase.cpp
-    src/particle.cpp
+    src/input.cpp
+    src/body.cpp
 
     src/tutorial1/tutorial1.cpp
     src/SimpleTransform.vertexshader

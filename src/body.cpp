@@ -11,26 +11,26 @@
 #include <glm/glm.hpp>
 
 #include "app.h"
-#include "particle.h"
+#include "body.h"
 
 // PointBase -----------------
-ParticleBase::ParticleBase() {
+RigidBodyBase::RigidBodyBase() {
 }
 
-ParticleBase::~ParticleBase() {
+RigidBodyBase::~RigidBodyBase() {
 }
 
 // PointSphere ---------------
-ParticleSphere::ParticleSphere() {
+RigidBodySphere::RigidBodySphere() {
 }
 
-ParticleSphere::~ParticleSphere() {
+RigidBodySphere::~RigidBodySphere() {
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &elementbuffer);
 }
 
-ParticleBase* ParticleSphere::Create(int columns, int rows) {
-    ParticleSphere* p = new ParticleSphere();
+RigidBodyBase* RigidBodySphere::Create(int columns, int rows) {
+    RigidBodySphere* p = new RigidBodySphere();
 
     // top vertex
     p->vertices.push_back(Vector3(0.0, 1.0, 0.0));
@@ -94,7 +94,7 @@ ParticleBase* ParticleSphere::Create(int columns, int rows) {
     return p;
 }
 
-void ParticleSphere::init() {
+void RigidBodySphere::init() {
     //glGenVertexArrays(1, &vertexArrayID);
     //glBindVertexArray(vertexArrayID);
 
@@ -113,7 +113,7 @@ void ParticleSphere::init() {
     glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(short), indices.data(), GL_STATIC_DRAW);
 }
 
-void ParticleSphere::draw(const Application& app) {
+void RigidBodySphere::draw(const Application& app) {
 
     glUseProgram(programID);
 
