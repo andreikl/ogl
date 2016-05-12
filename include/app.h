@@ -15,6 +15,8 @@ public:
     // gets and sets view camera
 	glm::mat4 getView() const;
 	void setView(glm::mat4 view);
+    // gets projection matrix
+    glm::mat4 getProjection() const;
 
 public:
     /**

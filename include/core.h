@@ -4,8 +4,8 @@ const real PI = 3.1415926535897f;
 class Vector3 {
 // constructors and destructors
 public:
-    Vector3() : x(0.0), y(0.0), z(0.0) {}
-    Vector3(const real x, const real y, const real z): x(x), y(y), z(z) {}
+    Vector3();
+    Vector3(const real x, const real y, const real z);
 
 public:
     /** Holds the value along the x axis. */

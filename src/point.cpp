@@ -10,6 +10,7 @@
 // Include GLM
 #include <glm/glm.hpp>
 
+#include "app.h"
 #include "point.h"
 
 // PointBase -----------------
@@ -23,7 +24,12 @@ PointBase::~PointBase() {
 PointSphere::PointSphere() {
 }
 
-PointBase& PointSphere::Create(int columns = 5, int rows = 5) {
+PointSphere::~PointSphere() {
+    glDeleteBuffers(1, &vertexbuffer);
+    glDeleteBuffers(1, &elementbuffer);
+}
+
+PointBase* PointSphere::Create(int columns, int rows) {
     PointSphere* p = new PointSphere();
 
     // top vertex
@@ -32,7 +38,7 @@ PointBase& PointSphere::Create(int columns = 5, int rows = 5) {
     real step_row_angle = PI / rows;
     real step_col_angle = 2 * PI / columns;
 
-    // vertex
+    // vertices
     real cur_row_angle = step_row_angle;
     for (int i = 0; i < rows - 1; i++) {
         real cur_row_sin = sin(cur_row_angle);
@@ -53,54 +59,89 @@ PointBase& PointSphere::Create(int columns = 5, int rows = 5) {
         }
         cur_row_angle += step_row_angle;
     }
-
     // bottom vertex
-    p->triangles.push_back(0);
-    p->triangles.push_back(-1);
-    p->triangles.push_back(0);
+    p->vertices.push_back(Vector3(0.0, -1.0, 0.0));
+
     // sets up tringtles
     for (int i = 0; i < columns; i++) {
-        p->triangles.push_back(0);
-        p->triangles.push_back(i + 1);
-        p->triangles.push_back(i + 2);
+        p->indices.push_back(0);
+        p->indices.push_back(i + 1);
+        p->indices.push_back(i + 2);
     }
     int row_cur = 1;
     int row_next = row_cur + (columns + 1);
     for (int i = 0; i < rows - 2; i++) {
         for (int j = 0; j < columns; j++) {
-            p->triangles.push_back(row_cur + j);
-            p->triangles.push_back(row_next + j);
-            p->triangles.push_back(row_next + j + 1);
+            p->indices.push_back(row_cur + j);
+            p->indices.push_back(row_next + j);
+            p->indices.push_back(row_next + j + 1);
         }
         for (int j = 0; j < columns; j++) {
-            p->triangles.push_back(row_cur + j);
-            p->triangles.push_back(row_cur + j + 1);
-            p->triangles.push_back(row_next + j + 1);
+            p->indices.push_back(row_cur + j);
+            p->indices.push_back(row_cur + j + 1);
+            p->indices.push_back(row_next + j + 1);
         }
         row_cur = row_next;
         row_next += (columns + 1);
     }
     for (int i = 0; i < columns; i++) {
-        p->triangles.push_back(row_cur + i);
-        p->triangles.push_back(row_cur + i + 1);
-        p->triangles.push_back(row_next);
+        p->indices.push_back(row_cur + i);
+        p->indices.push_back(row_cur + i + 1);
+        p->indices.push_back(row_next);
     }
-    return *p;
+
+    p->init();
+    return p;
 }
 
 void PointSphere::init() {
-    glGenVertexArrays(1, &vertexArrayID);
-    glBindVertexArray(vertexArrayID);
+    //glGenVertexArrays(1, &vertexArrayID);
+    //glBindVertexArray(vertexArrayID);
 
     // Create and compile our GLSL program from the shaders
     programID = loadShaders("SimpleTransform.vertexshader", "SingleColor.fragmentshader");
+
     // Get a handle for our "MVP" uniform
     matrixID = glGetUniformLocation(programID, "MVP");
 
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(real), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vector3), vertices.data(), GL_STATIC_DRAW);
+
+    glGenBuffers(1, &elementbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, elementbuffer);
+    glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(short), indices.data(), GL_STATIC_DRAW);
 }
 
-void PointSphere::draw() {
+void PointSphere::draw(const Application& app) {
+
+    glUseProgram(programID);
+
+    glm::mat4 mvp = app.getProjection() * app.getView();
+    // ser transformation matrix to the "MVP" uniform
+    glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
+
+    // 1rst attribute buffer : vertices
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glVertexAttribPointer(
+        0, // attribute 0. No particular reason for 0, but must match the layout in the shader.
+        4, // size
+        GL_FLOAT, // type
+        GL_FALSE, // normalized?
+        0, // stride
+        nullptr // array buffer offset
+    );
+
+    // Index buffer
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+
+    // Draw the triangles !
+    glDrawElements(GL_TRIANGLES, // mode
+        indices.size(), // count
+        GL_UNSIGNED_SHORT, // type
+        nullptr // element array buffer offset
+    );
+
+    glDisableVertexAttribArray(0);
 }

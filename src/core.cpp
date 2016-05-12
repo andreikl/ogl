@@ -14,6 +14,12 @@
 
 #include "core.h"
 
+Vector3::Vector3(): x(0.0), y(0.0), z(0.0) {
+}
+
+Vector3::Vector3(const real x, const real y, const real z) : x(x), y(y), z(z) {
+}
+
 GLuint loadShaders(const char* vertex_file_path, const char* fragment_file_path) {
     // Read the Vertex Shader code from the file
     std::string vertexShaderCode;
