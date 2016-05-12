@@ -1,8 +1,8 @@
 class Application;
 class RigidBodyBase;
 
-// shows sphere and provides orbit mouse input
-class Tutorial1 : Application {
+// ballistic demo
+class Tutorial2 : Application {
 public:
     static Application* Create();
 

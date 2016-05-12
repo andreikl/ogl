@@ -8,31 +8,30 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "app.h"
 #include "body.h"
 #include "input.h"
 
-#include "tutorial1.h"
+#include "tutorial2.h"
 
-RigidBodyBase* body;
-
-Application* Tutorial1::Create() {
-    auto tutorial1 = new Tutorial1();
-    tutorial1->init();
-    return tutorial1;
+Application* Tutorial2::Create() {
+    auto tutorial2 = new Tutorial2();
+    tutorial2->init();
+    return tutorial2;
 }
 
-void Tutorial1::initWorld() {
+void Tutorial2::initWorld() {
     Application::initWorld();
 
     input = InputOrbit::create(*this, 3);
     body = RigidBodySphere::Create();
 }
 
-void Tutorial1::draw() {
+void Tutorial2::draw() {
     body->draw(*this);
 }
 
-void Tutorial1::dispose() {
+void Tutorial2::dispose() {
     Application::dispose();
 
     delete body;

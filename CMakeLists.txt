@@ -54,7 +54,8 @@ add_executable(ogl
     src/input.cpp
     src/body.cpp
 
-    src/tutorial1/tutorial1.cpp
+    src/tutorial1.cpp
+    src/tutorial2.cpp
     src/SimpleTransform.vertexshader
     src/SingleColor.fragmentshader
 )

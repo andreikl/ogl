@@ -8,10 +8,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "app.h"
+
 #include "tutorial1.h"
+#include "tutorial2.h"
 
 int main(void) {
-    auto app = Tutorial1::Create();
+    //auto app = Tutorial1::Create();
+    auto app = Tutorial2::Create();
     app->run();
     delete app;
 }
