@@ -10,27 +10,22 @@
 // Include GLM
 #include <glm/glm.hpp>
 
+#include "core.h"
 #include "app.h"
-#include "body.h"
-
-// PointBase -----------------
-RigidBodyBase::RigidBodyBase() {
-}
-
-RigidBodyBase::~RigidBodyBase() {
-}
+#include "geometry/body.h"
+#include "geometry/sphere.h"
 
 // PointSphere ---------------
-RigidBodySphere::RigidBodySphere() {
+Sphere::Sphere() {
 }
 
-RigidBodySphere::~RigidBodySphere() {
+Sphere::~Sphere() {
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &elementbuffer);
 }
 
-RigidBodyBase* RigidBodySphere::Create(int columns, int rows) {
-    RigidBodySphere* p = new RigidBodySphere();
+RigidBodyBase* Sphere::Create(int columns, int rows) {
+    Sphere* p = new Sphere();
 
     // top vertex
     p->vertices.push_back(Vector3(0.0, 1.0, 0.0));
@@ -94,7 +89,7 @@ RigidBodyBase* RigidBodySphere::Create(int columns, int rows) {
     return p;
 }
 
-void RigidBodySphere::init() {
+void Sphere::init() {
     //glGenVertexArrays(1, &vertexArrayID);
     //glBindVertexArray(vertexArrayID);
 
@@ -113,7 +108,7 @@ void RigidBodySphere::init() {
     glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(short), indices.data(), GL_STATIC_DRAW);
 }
 
-void RigidBodySphere::draw(const Application& app) {
+void Sphere::draw(const Application& app) {
 
     glUseProgram(programID);
 

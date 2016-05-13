@@ -8,9 +8,13 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "core.h"
 #include "app.h"
-#include "body.h"
 #include "input.h"
+
+#include "geometry/body.h"
+#include "geometry/grid.h"
+#include "geometry/sphere.h"
 
 #include "tutorial2.h"
 
@@ -24,16 +28,19 @@ void Tutorial2::initWorld() {
     Application::initWorld();
 
     input = InputOrbit::create(*this, 3);
-    body = RigidBodySphere::Create();
+    grid = Grid::Create();
+    sphere = Sphere::Create();
 }
 
 void Tutorial2::draw() {
-    body->draw(*this);
+    grid->draw(*this);
+    sphere->draw(*this);
 }
 
 void Tutorial2::dispose() {
     Application::dispose();
 
-    delete body;
+    delete sphere;
+    delete grid;
     delete input;
 }

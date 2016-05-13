@@ -52,7 +52,9 @@ add_executable(ogl
     src/app.cpp
     src/main.cpp
     src/input.cpp
-    src/body.cpp
+    src/geometry/body.cpp
+    src/geometry/grid.cpp
+    src/geometry/sphere.cpp
 
     src/tutorial1.cpp
     src/tutorial2.cpp
