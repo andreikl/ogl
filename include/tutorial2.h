@@ -12,6 +12,6 @@ protected:
     virtual void dispose();
 
 private:
-    RigidBodyBase* sphere;
+    RigidBodyBase* dice;
     RigidBodyBase* grid;
 };

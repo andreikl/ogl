@@ -15,7 +15,6 @@
 #include "geometry/body.h"
 #include "geometry/grid.h"
 
-// PointSphere ---------------
 Grid::Grid() {
 }
 
@@ -53,6 +52,7 @@ void Grid::init() {
 
     // Get a handle for our "MVP" uniform
     matrixID = glGetUniformLocation(programID, "MVP");
+    colorID = glGetUniformLocation(programID, "uColor");
 
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -65,6 +65,8 @@ void Grid::draw(const Application& app) {
     glm::mat4 mvp = app.getProjection() * app.getView();
     // ser transformation matrix to the "MVP" uniform
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
+    // set solid color
+    glUniform4f(colorID, 0.5f, 0.5f, 0.5f, 1.0f);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);

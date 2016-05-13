@@ -3,12 +3,12 @@
 class Application;
 class RigidBodyBase;
 
-class Sphere: RigidBodyBase {
+class Cube: RigidBodyBase {
 // constructors and destructors
 public:
-    Sphere();
-    ~Sphere();
-    static RigidBodyBase* Create(int columns = 10, int rows = 5);
+    Cube();
+    ~Cube();
+    static RigidBodyBase* Create();
 
 public:
     void virtual init();

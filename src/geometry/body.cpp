@@ -13,7 +13,6 @@
 #include "core.h"
 #include "geometry/body.h"
 
-// PointBase -----------------
 RigidBodyBase::RigidBodyBase() {
 }
 

@@ -14,7 +14,7 @@
 
 #include "geometry/body.h"
 #include "geometry/grid.h"
-#include "geometry/sphere.h"
+#include "geometry/cube.h"
 
 #include "tutorial2.h"
 
@@ -29,18 +29,18 @@ void Tutorial2::initWorld() {
 
     input = InputOrbit::create(*this, 3);
     grid = Grid::Create();
-    sphere = Sphere::Create();
+    dice = Cube::Create();
 }
 
 void Tutorial2::draw() {
     grid->draw(*this);
-    sphere->draw(*this);
+    dice->draw(*this);
 }
 
 void Tutorial2::dispose() {
     Application::dispose();
 
-    delete sphere;
+    delete dice;
     delete grid;
     delete input;
 }

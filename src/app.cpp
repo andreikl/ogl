@@ -114,7 +114,11 @@ void Application::initApplication() {
     //glDepthFunc(GL_GREATER);
 
 	// Cull triangles which normal is not towards the camera
+    glDisable(GL_CULL_FACE);
 	//glEnable(GL_CULL_FACE);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Application::initWorld() {

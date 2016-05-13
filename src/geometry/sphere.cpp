@@ -15,7 +15,6 @@
 #include "geometry/body.h"
 #include "geometry/sphere.h"
 
-// PointSphere ---------------
 Sphere::Sphere() {
 }
 
@@ -98,6 +97,7 @@ void Sphere::init() {
 
     // Get a handle for our "MVP" uniform
     matrixID = glGetUniformLocation(programID, "MVP");
+    colorID = glGetUniformLocation(programID, "uColor");
 
     glGenBuffers(1, &vertexbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -115,6 +115,8 @@ void Sphere::draw(const Application& app) {
     glm::mat4 mvp = app.getProjection() * app.getView();
     // ser transformation matrix to the "MVP" uniform
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
+    // set solid color
+    glUniform4f(colorID, 1.0, 0.0, 0.0, 0.7f);
 
     // 1rst attribute buffer : vertices
     glEnableVertexAttribArray(0);

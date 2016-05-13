@@ -55,6 +55,7 @@ add_executable(ogl
     src/geometry/body.cpp
     src/geometry/grid.cpp
     src/geometry/sphere.cpp
+    src/geometry/cube.cpp
 
     src/tutorial1.cpp
     src/tutorial2.cpp

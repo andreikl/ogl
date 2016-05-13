@@ -17,6 +17,7 @@ public:
 private:
     GLuint programID;
     GLuint matrixID;
+    GLuint colorID;
 
     GLuint vertexbuffer;
 };
