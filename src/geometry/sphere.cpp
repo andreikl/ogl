@@ -23,14 +23,14 @@ Sphere::~Sphere() {
     glDeleteBuffers(1, &elementbuffer);
 }
 
-RigidBodyBase* Sphere::Create(int columns, int rows) {
+RigidBody* Sphere::Create(int columns, int rows) {
     Sphere* p = new Sphere();
 
     // top vertex
     p->vertices.push_back(Vector3(0.0, 1.0, 0.0));
 
-    real step_row_angle = PI / rows;
-    real step_col_angle = 2 * PI / columns;
+    real step_row_angle = R_PI / rows;
+    real step_col_angle = 2 * R_PI / columns;
 
     // vertices
     real cur_row_angle = step_row_angle;
@@ -135,7 +135,7 @@ void Sphere::draw(const Application& app) {
 
     // Draw the triangles !
     glDrawElements(GL_TRIANGLES, // mode
-        indices.size(), // count
+        (GLsizei)indices.size(), // count
         GL_UNSIGNED_SHORT, // type
         nullptr // element array buffer offset
     );

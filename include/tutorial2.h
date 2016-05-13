@@ -1,5 +1,5 @@
 class Application;
-class RigidBodyBase;
+class RigidBody;
 
 // ballistic demo
 class Tutorial2 : Application {
@@ -12,6 +12,6 @@ protected:
     virtual void dispose();
 
 private:
-    RigidBodyBase* dice;
-    RigidBodyBase* grid;
+    RigidBody* dice;
+    RigidBody* grid;
 };

@@ -29,7 +29,12 @@ void Tutorial2::initWorld() {
 
     input = InputOrbit::create(*this, 3);
     grid = Grid::Create();
+
     dice = Cube::Create();
+    dice->setMass(200.0);
+    dice->setVelocity(30.0, 40.0, 0.0);
+    dice->setAcceleration(-10.0, 0.0, 0.0);
+    dice->setDamping(0.99f, 0.99f);
 }
 
 void Tutorial2::draw() {

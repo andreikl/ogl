@@ -23,7 +23,7 @@ Cube::~Cube() {
     glDeleteBuffers(1, &elementbuffer);
 }
 
-RigidBodyBase* Cube::Create() {
+RigidBody* Cube::Create() {
     Cube* p = new Cube();
 
     //top front left corner
@@ -130,7 +130,7 @@ void Cube::draw(const Application& app) {
 
     // Draw the triangles !
     glDrawElements(GL_LINES, // mode
-        indices.size(), // count
+        (GLsizei)indices.size(), // count
         GL_UNSIGNED_SHORT, // type
         nullptr
     );

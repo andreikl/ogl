@@ -1,14 +1,14 @@
 #include <vector>
 
 class Application;
-class RigidBodyBase;
+class RigidBody;
 
-class Cube: RigidBodyBase {
+class Cube: RigidBody {
 // constructors and destructors
 public:
     Cube();
     ~Cube();
-    static RigidBodyBase* Create();
+    static RigidBody* Create();
 
 public:
     void virtual init();

@@ -73,8 +73,8 @@ void InputOrbit::handle() {
 		auto rfx = deltax / this->app.getWidth();
 		auto rfy = deltay / this->app.getHeight();
 		// calculates angle
-		auto ax = 2 * PI * rfx;
-		auto ay = 2 * PI * rfy;
+		auto ax = 2 * R_PI * rfx;
+		auto ay = 2 * R_PI * rfy;
 		// updates angle
 		this->rx += ax;
 		this->ry -= ay;
@@ -102,7 +102,7 @@ void InputOrbit::update() {
 	auto y = r * sin(this->ry);
 	auto z = r * cos(this->rx) * cos(this->ry);
 	std::cout << "update: x: " << x << ", y: " << y << ", z: " << z << std::endl;
-	if (this->ry < PI / 2 && this->ry > -PI / 2) {
+	if (this->ry < R_PI / 2 && this->ry > -R_PI / 2) {
 		app.setView(glm::lookAt(
 			glm::vec3(x, y, z), // Camera position in World Space
 			glm::vec3(0, 0, 0), // looks position

@@ -1,5 +1,5 @@
 class Application;
-class RigidBodyBase;
+class RigidBody;
 
 // shows sphere and provides orbit mouse input
 class Tutorial1 : Application {
@@ -12,5 +12,5 @@ protected:
     virtual void dispose();
 
 private:
-    RigidBodyBase* body;
+    RigidBody* body;
 };

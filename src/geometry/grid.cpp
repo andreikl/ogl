@@ -22,7 +22,7 @@ Grid::~Grid() {
     glDeleteBuffers(1, &vertexbuffer);
 }
 
-RigidBodyBase* Grid::Create(int columns, int rows) {
+RigidBody* Grid::Create(int columns, int rows) {
     Grid* p = new Grid();
 
     real step_column = 2.0f / columns;
@@ -83,7 +83,7 @@ void Grid::draw(const Application& app) {
     // Draw the triangles !
     glDrawArrays(GL_LINES, // mode
         0, // first
-        vertices.size() // count
+        (GLsizei)vertices.size() // count
     );
 
     glDisableVertexAttribArray(0);

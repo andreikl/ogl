@@ -1,14 +1,14 @@
 #include <vector>
 
 class Application;
-class RigidBodyBase;
+class RigidBody;
 
-class Sphere: RigidBodyBase {
+class Sphere: RigidBody {
 // constructors and destructors
 public:
     Sphere();
     ~Sphere();
-    static RigidBodyBase* Create(int columns = 10, int rows = 5);
+    static RigidBody* Create(int columns = 10, int rows = 5);
 
 public:
     void virtual init();
