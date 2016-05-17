@@ -17,6 +17,14 @@
 #include "input.h"
 #include "app.h"
 
+//#include "core.h"
+
+// test draw ------------
+GLuint programID;
+GLuint vertexbuffer;
+GLuint vertexArrayID;
+// end test draw --------
+
 Application::Application() {
 }
 
@@ -58,6 +66,22 @@ void Application::run() {
 			this->input->handle();
 		}
         this->draw();
+
+		// end test draw ------------
+		glUseProgram(programID);
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		glVertexAttribPointer(
+			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+		);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDisableVertexAttribArray(0);
+		// end test draw ------------
 
         // Swap buffers
         glfwSwapBuffers(window);
@@ -103,8 +127,6 @@ void Application::initApplication() {
     // Ensure we can capture the escape key being pressed below
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-	//glfwPollEvents();
-
     // Dark blue background
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -115,11 +137,11 @@ void Application::initApplication() {
     //glDepthFunc(GL_GREATER);
 
 	// Cull triangles which normal is not towards the camera
-    glDisable(GL_CULL_FACE);
+    //glDisable(GL_CULL_FACE);
 	//glEnable(GL_CULL_FACE);
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Application::initWorld() {
@@ -127,9 +149,32 @@ void Application::initWorld() {
     this->projection = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
     // Or, for an ortho camera :
     //this->projection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 0.0f, 100.0f); // In world coordinates
+
+	// test draw ----------
+	glGenVertexArrays(1, &vertexArrayID);
+	glBindVertexArray(vertexArrayID);
+
+	programID = loadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
+
+	static const GLfloat g_vertex_buffer_data[] = { 
+		-1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f,
+		 0.0f,  1.0f, 0.0f,
+	};
+
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	// end test draw ------
 }
 
 void Application::dispose() {
+	// test draw --------------
+	glDeleteBuffers(1, &vertexbuffer);
+	glDeleteVertexArrays(1, &vertexArrayID);
+	glDeleteProgram(programID);
+	// end test draw ----------
+
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
 }
