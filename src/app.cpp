@@ -13,6 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 // user includes
+#include "core.h"
 #include "input.h"
 #include "app.h"
 

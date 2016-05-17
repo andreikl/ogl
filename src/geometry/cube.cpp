@@ -107,7 +107,11 @@ void Cube::init() {
 void Cube::draw(const Application& app) {
     glUseProgram(programID);
 
-    glm::mat4 mvp = app.getProjection() * app.getView();
+    real arr[16];
+    Matrix4 m = this->getTransform();
+    m.fillGLArray(arr);
+
+    glm::mat4 mvp = app.getProjection() * app.getView() * glm::mat4(arr[0]);
     // ser transformation matrix to the "MVP" uniform
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
     // set solid color
