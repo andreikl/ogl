@@ -29,6 +29,7 @@ protected:
     * settings of the application window.
     */
     const char* title = "Ogl";
+    float lastFrameDuration;
 	int width = 768;
     int height = 1024;
     /**
@@ -50,6 +51,10 @@ protected:
     * draws app
     */
     virtual void draw() = 0;
+    /**
+    * handles key
+    */
+    virtual void handleKey(int key, int scancode, int action, int mods) = 0;
     /**
     * Sets up the application
     */

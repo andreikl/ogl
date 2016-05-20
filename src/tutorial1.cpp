@@ -29,6 +29,9 @@ void Tutorial1::initWorld() {
     body = Sphere::Create();
 }
 
+void Tutorial1::handleKey(int key, int scancode, int action, int mods) {
+}
+
 void Tutorial1::draw() {
     body->draw(*this);
 }

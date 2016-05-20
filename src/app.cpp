@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <iostream>
+
 // Include GLEW
 #include <GL/glew.h>
 
@@ -25,11 +27,19 @@ GLuint vertexbuffer;
 GLuint vertexArrayID;
 // end test draw --------
 
+// Application
+Application* that = nullptr;
+
 Application::Application() {
+    if (that) {
+        throw "instance of Application is already created!";
+    }
+    that = this;
 }
 
 Application::~Application() {
     this->dispose();
+    that = nullptr;
 }
 
 /**
@@ -58,7 +68,14 @@ glm::mat4 Application::getProjection() const {
 };
 
 void Application::run() {
+    double lastTime = glfwGetTime();
+    double lastFrameTime = lastTime;
     do {
+        double currentTime = glfwGetTime();
+        lastFrameDuration = (float)(currentTime - lastFrameTime) * 0.001f;
+        lastFrameTime = currentTime;
+
+
         // Clear the screen.
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -68,19 +85,19 @@ void Application::run() {
         this->draw();
 
 		// end test draw ------------
-		glUseProgram(programID);
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glVertexAttribPointer(
-			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glDisableVertexAttribArray(0);
+		//glUseProgram(programID);
+		//glEnableVertexAttribArray(0);
+		//glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+		//glVertexAttribPointer(
+		//	0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		//	3,                  // size
+		//	GL_FLOAT,           // type
+		//	GL_FALSE,           // normalized?
+		//	0,                  // stride
+		//	(void*)0            // array buffer offset
+		//);
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
+		//glDisableVertexAttribArray(0);
 		// end test draw ------------
 
         // Swap buffers
@@ -142,6 +159,11 @@ void Application::initApplication() {
 
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glfwSetKeyCallback(this->window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+        that->handleKey(key, scancode, action, mods);
+        //std::cout << "key pressed: " << key << std::endl;
+    });
 }
 
 void Application::initWorld() {

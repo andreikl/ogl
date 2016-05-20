@@ -15,6 +15,10 @@ public:
 
 // Rigid body mass
 public:
+    // Calculates internal data from state data.
+    void calculateDerivedData();
+    //Integrates the rigid body forward in time by the given amount.
+    void integrate(real duration);
     // Sets the mass of the rigid body.
     void setMass(const real mass);
     // Gets the mass of the rigid body.

@@ -35,9 +35,22 @@ void Tutorial2::initWorld() {
     dice->setVelocity(30.0, 40.0, 0.0);
     dice->setAcceleration(-10.0, 0.0, 0.0);
     dice->setDamping(0.99f, 0.99f);
+
+    dice->setAwake();
+    dice->setCanSleep(false);
+}
+
+void Tutorial2::handleKey(int key, int scancode, int action, int mods) {
+    if (key == GLFW_KEY_ENTER && action == GLFW_RELEASE) {
+        dice->setPosition(0.0f, 1.0f, 0.0f);
+        dice->clearAccumulators();
+        dice->addForce(Vector3(1.0f, 0.0f, 0.0f));
+    }
 }
 
 void Tutorial2::draw() {
+    dice->integrate(this->lastFrameDuration);
+
     grid->draw(*this);
     dice->draw(*this);
 }
