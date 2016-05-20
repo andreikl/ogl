@@ -32,9 +32,8 @@ void Tutorial2::initWorld() {
 
     dice = Cube::Create();
     dice->setMass(200.0);
-    dice->setVelocity(30.0, 40.0, 0.0);
-    dice->setAcceleration(-10.0, 0.0, 0.0);
-    dice->setDamping(0.99f, 0.99f);
+    dice->setOrientation(1, 0, 0, 0);
+    dice->setDamping(0.90f, 0.90f);
 
     dice->setAwake();
     dice->setCanSleep(false);
@@ -42,9 +41,12 @@ void Tutorial2::initWorld() {
 
 void Tutorial2::handleKey(int key, int scancode, int action, int mods) {
     if (key == GLFW_KEY_ENTER && action == GLFW_RELEASE) {
+        //dice->clearAccumulators();
         dice->setPosition(0.0f, 1.0f, 0.0f);
-        dice->clearAccumulators();
-        dice->addForce(Vector3(1.0f, 0.0f, 0.0f));
+        dice->setVelocity(150.0, 300.0, 0.0);
+        dice->setAcceleration(1000.0, 0.0, 0.0);
+        dice->setRotation(3000, 0.0, 0.0);
+        //dice->addForceAtPoint(Vector3(5.0f, 5.0f, 0.0f), Vector3(0.5f, 0.5f, 0.5f));
     }
 }
 
