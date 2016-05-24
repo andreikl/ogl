@@ -31,11 +31,16 @@ void Tutorial2::initWorld() {
     grid = Grid::Create();
 
     dice = Cube::Create();
-    //dice->setMass(1);
+    dice->setMass(1);
+
+    Matrix3 it;
+    //it.setBlockInertiaTensor(Vector3(2, 1, 1), 1);
+    it.setDiagonal(5.0f, 2.0f, 4.0f);
+    dice->setInertiaTensor(it);
 
     // slows down moving
     // 1.0 doesn't slow down
-    //dice->setDamping(1.0f, 1.0f);
+    dice->setDamping(1.0f, 1.0f);
 
     dice->setAwake();
     dice->setCanSleep(false);
@@ -52,12 +57,13 @@ void Tutorial2::handleKey(int key, int scancode, int action, int mods) {
         dice->setOrientation(1.0f, 0.0f, 0.0f, 0.0f);
         // 2 - moves out of the world in second
         // 0.2 - 10 sec to move out of the world in second
-        dice->setVelocity(0.2, 0.0, 0.0);
+        //dice->setVelocity(0.2, 0.0, 0.0);
         // 1 m per second
-        dice->setAcceleration(1.0f, 0.0f, 0.0f);
+        //dice->setAcceleration(1.0f, 0.0f, 0.0f);
         // 2 * R_PI - full rotation per second
-        dice->setRotation(0.0f, 0.0f, 2 * R_PI / 10);
-        dice->addTorque(Vector3(1.0f, 1.0f, 1.0f));
+        dice->setRotation(0.0f, 0.0f, 2 * R_PI / 100);
+        //dice->addTorque(Vector3(10.0f, 5.0f, 2.0f));
+        //dice->addForceAtPoint(Vector3(10.0f, 10.0f, 10.0f), Vector3(1.0f, 0.0f, 0.0f));
     }
 }
 

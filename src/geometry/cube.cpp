@@ -111,6 +111,11 @@ void Cube::draw(const Application& app) {
     Matrix4 m = this->getTransform();
     m.fillGLArray(arr);
 
+    // scale diagonale
+    //arr[0] = arr[0] * 0.5f;
+    //arr[5] = arr[5] * 0.5f;
+    //arr[10] = arr[10] * 0.5f;
+
     glm::mat4 tmp1 = glm::mat4(
         arr[0], arr[1], arr[2], arr[3],
         arr[4], arr[5], arr[6], arr[7],
