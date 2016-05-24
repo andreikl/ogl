@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <iostream>
+#include <iostream> // std::cout, std::fixed
+#include <iomanip> // precision
+#include <sstream> // stringstream
+#include <string> // string
 
 // Include GLEW
 #include <GL/glew.h>
@@ -15,9 +18,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 // user includes
-#include "core.h"
-#include "input.h"
-#include "app.h"
+#include "core.hpp"
+#include "input.hpp"
+#include "app.hpp"
 
 //#include "core.h"
 
@@ -31,6 +34,8 @@ GLuint vertexArrayID;
 Application* that = nullptr;
 
 Application::Application() {
+    this->startTime = 0.0f;
+
     if (that) {
         throw "instance of Application is already created!";
     }
@@ -67,14 +72,22 @@ glm::mat4 Application::getProjection() const {
     return this->projection;
 };
 
+double Application::getStartTime() const {
+    return this->startTime;
+}
+
+double Application::getLastFrameDelta() const {
+    return this->lastFrameDelta;
+}
+
 void Application::run() {
-    double lastTime = glfwGetTime();
-    double lastFrameTime = lastTime;
+    double lastTime = 0.0;
+    double lastFrameTime = 0.0;
+
     do {
         double currentTime = glfwGetTime();
-        lastFrameDuration = (float)(currentTime - lastFrameTime) * 0.001f;
+        lastFrameDelta = currentTime - lastFrameTime;
         lastFrameTime = currentTime;
-
 
         // Clear the screen.
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -83,6 +96,10 @@ void Application::run() {
 			this->input->handle();
 		}
         this->draw();
+
+        std::stringstream str_time;
+        str_time << std::fixed << std::setprecision(1) << glfwGetTime() - this->getStartTime();
+        printText2D(str_time.str().c_str(), 10, 10, 10);
 
 		// end test draw ------------
 		//glUseProgram(programID);
@@ -159,6 +176,8 @@ void Application::initApplication() {
 
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    initText2D("Holstein.DDS");
 
     glfwSetKeyCallback(this->window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
         that->handleKey(key, scancode, action, mods);

@@ -10,8 +10,8 @@
 // Include GLM
 #include <glm/glm.hpp>
 
-#include "core.h"
-#include "geometry/body.h"
+#include "core.hpp"
+#include "geometry/body.hpp"
 
 RigidBody::RigidBody() {
 }

@@ -2,4 +2,6 @@ build/**/*.*
 !build/generate_vs2013.bat
 !build/generate_vs2015.bat
 
+include/boost/**/*.*
+
 CMakeFiles/**/*.*

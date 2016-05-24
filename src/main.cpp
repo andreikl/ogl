@@ -7,11 +7,11 @@
 // Include GLM
 #include <glm/glm.hpp>
 
-#include "core.h"
-#include "app.h"
+#include "core.hpp"
+#include "app.hpp"
 
-#include "tutorial1.h"
-#include "tutorial2.h"
+#include "tutorial1.hpp"
+#include "tutorial2.hpp"
 
 int main(void) {
     //auto app = Tutorial1::Create();

@@ -12,9 +12,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "core.h"
-#include "app.h"
-#include "input.h"
+#include "core.hpp"
+#include "app.hpp"
+#include "input.hpp"
 
 // InputBase
 InputBase::InputBase(Application & app): app(app) {

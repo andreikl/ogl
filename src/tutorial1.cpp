@@ -8,13 +8,13 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "core.h"
-#include "app.h"
-#include "input.h"
-#include "geometry/body.h"
-#include "geometry/sphere.h"
+#include "core.hpp"
+#include "app.hpp"
+#include "input.hpp"
+#include "geometry/body.hpp"
+#include "geometry/sphere.hpp"
 
-#include "tutorial1.h"
+#include "tutorial1.hpp"
 
 Application* Tutorial1::Create() {
     auto tutorial1 = new Tutorial1();

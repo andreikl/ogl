@@ -10,10 +10,10 @@
 // Include GLM
 #include <glm/glm.hpp>
 
-#include "core.h"
-#include "app.h"
-#include "geometry/body.h"
-#include "geometry/cube.h"
+#include "core.hpp"
+#include "app.hpp"
+#include "geometry/body.hpp"
+#include "geometry/cube.hpp"
 
 Cube::Cube() {
 }
