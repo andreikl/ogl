@@ -43,10 +43,6 @@ InputBase* InputOrbit::create(Application& app, double radius) {
 }
 
 void InputOrbit::init() {
-	glfwSetMouseButtonCallback(this->app.getWindow(), [] (GLFWwindow* window, int button, int action, int mods) -> void {
-		//std::cout << button << " " << action << " " << mods << std::endl;
-	});
-
     glfwSetScrollCallback(this->app.getWindow(), [] (GLFWwindow* window, double xoffset, double yoffset) {
 		if (yoffset > 0) {
 			that->sf += 0.1;

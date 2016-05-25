@@ -21,61 +21,25 @@ RigidBody::~RigidBody() {
 
 // Internal function to do an intertia tensor transform by a quaternion.
 static inline void _transformInertiaTensor(Matrix3 &iitWorld, const Quaternion &q, const Matrix3 &iitBody, const Matrix4 &rotmat) {
-    real t4 = rotmat.data[0] * iitBody.data[0] +
-        rotmat.data[1] * iitBody.data[3] +
-        rotmat.data[2] * iitBody.data[6];
-    real t9 = rotmat.data[0] * iitBody.data[1] +
-        rotmat.data[1] * iitBody.data[4] +
-        rotmat.data[2] * iitBody.data[7];
-    real t14 = rotmat.data[0] * iitBody.data[2] +
-        rotmat.data[1] * iitBody.data[5] +
-        rotmat.data[2] * iitBody.data[8];
-    real t28 = rotmat.data[4] * iitBody.data[0] +
-        rotmat.data[5] * iitBody.data[3] +
-        rotmat.data[6] * iitBody.data[6];
-    real t33 = rotmat.data[4] * iitBody.data[1] +
-        rotmat.data[5] * iitBody.data[4] +
-        rotmat.data[6] * iitBody.data[7];
-    real t38 = rotmat.data[4] * iitBody.data[2] +
-        rotmat.data[5] * iitBody.data[5] +
-        rotmat.data[6] * iitBody.data[8];
-    real t52 = rotmat.data[8] * iitBody.data[0] +
-        rotmat.data[9] * iitBody.data[3] +
-        rotmat.data[10] * iitBody.data[6];
-    real t57 = rotmat.data[8] * iitBody.data[1] +
-        rotmat.data[9] * iitBody.data[4] +
-        rotmat.data[10] * iitBody.data[7];
-    real t62 = rotmat.data[8] * iitBody.data[2] +
-        rotmat.data[9] * iitBody.data[5] +
-        rotmat.data[10] * iitBody.data[8];
+    real t4 = rotmat.data[0] * iitBody.data[0] + rotmat.data[1] * iitBody.data[3] + rotmat.data[2] * iitBody.data[6];
+    real t9 = rotmat.data[0] * iitBody.data[1] + rotmat.data[1] * iitBody.data[4] + rotmat.data[2] * iitBody.data[7];
+    real t14 = rotmat.data[0] * iitBody.data[2] + rotmat.data[1] * iitBody.data[5] + rotmat.data[2] * iitBody.data[8];
+    real t28 = rotmat.data[4] * iitBody.data[0] + rotmat.data[5] * iitBody.data[3] + rotmat.data[6] * iitBody.data[6];
+    real t33 = rotmat.data[4] * iitBody.data[1] + rotmat.data[5] * iitBody.data[4] + rotmat.data[6] * iitBody.data[7];
+    real t38 = rotmat.data[4] * iitBody.data[2] + rotmat.data[5] * iitBody.data[5] + rotmat.data[6] * iitBody.data[8];
+    real t52 = rotmat.data[8] * iitBody.data[0] + rotmat.data[9] * iitBody.data[3] + rotmat.data[10] * iitBody.data[6];
+    real t57 = rotmat.data[8] * iitBody.data[1] + rotmat.data[9] * iitBody.data[4] + rotmat.data[10] * iitBody.data[7];
+    real t62 = rotmat.data[8] * iitBody.data[2] + rotmat.data[9] * iitBody.data[5] + rotmat.data[10] * iitBody.data[8];
 
-    iitWorld.data[0] = t4*rotmat.data[0] +
-        t9*rotmat.data[1] +
-        t14*rotmat.data[2];
-    iitWorld.data[1] = t4*rotmat.data[4] +
-        t9*rotmat.data[5] +
-        t14*rotmat.data[6];
-    iitWorld.data[2] = t4*rotmat.data[8] +
-        t9*rotmat.data[9] +
-        t14*rotmat.data[10];
-    iitWorld.data[3] = t28*rotmat.data[0] +
-        t33*rotmat.data[1] +
-        t38*rotmat.data[2];
-    iitWorld.data[4] = t28*rotmat.data[4] +
-        t33*rotmat.data[5] +
-        t38*rotmat.data[6];
-    iitWorld.data[5] = t28*rotmat.data[8] +
-        t33*rotmat.data[9] +
-        t38*rotmat.data[10];
-    iitWorld.data[6] = t52*rotmat.data[0] +
-        t57*rotmat.data[1] +
-        t62*rotmat.data[2];
-    iitWorld.data[7] = t52*rotmat.data[4] +
-        t57*rotmat.data[5] +
-        t62*rotmat.data[6];
-    iitWorld.data[8] = t52*rotmat.data[8] +
-        t57*rotmat.data[9] +
-        t62*rotmat.data[10];
+    iitWorld.data[0] = t4 * rotmat.data[0] + t9 * rotmat.data[1] + t14 * rotmat.data[2];
+    iitWorld.data[1] = t4 * rotmat.data[4] + t9 * rotmat.data[5] + t14 * rotmat.data[6];
+    iitWorld.data[2] = t4 * rotmat.data[8] + t9 * rotmat.data[9] + t14 * rotmat.data[10];
+    iitWorld.data[3] = t28 * rotmat.data[0] + t33 * rotmat.data[1] + t38 * rotmat.data[2];
+    iitWorld.data[4] = t28 * rotmat.data[4] + t33 * rotmat.data[5] + t38 * rotmat.data[6];
+    iitWorld.data[5] = t28 * rotmat.data[8] + t33 * rotmat.data[9] + t38 * rotmat.data[10];
+    iitWorld.data[6] = t52 * rotmat.data[0] + t57 * rotmat.data[1] + t62 * rotmat.data[2];
+    iitWorld.data[7] = t52 * rotmat.data[4] + t57 * rotmat.data[5] + t62 * rotmat.data[6];
+    iitWorld.data[8] = t52 * rotmat.data[8] + t57 * rotmat.data[9] + t62 * rotmat.data[10];
 }
 
 // function that creates a transform matrix from a position and orientation.
@@ -86,7 +50,7 @@ static inline void _calculateTransformMatrix(Matrix4 &transformMatrix, const Vec
     transformMatrix.data[3] = position.x;
 
     transformMatrix.data[4] = 2 * orientation.i * orientation.j + 2 * orientation.r * orientation.k;
-    transformMatrix.data[5] = 1 - 2 * orientation.i * orientation.i - 2 * orientation.k*orientation.k;
+    transformMatrix.data[5] = 1 - 2 * orientation.i * orientation.i - 2 * orientation.k * orientation.k;
     transformMatrix.data[6] = 2 * orientation.j * orientation.k - 2 * orientation.r * orientation.i;
     transformMatrix.data[7] = position.y;
 
@@ -107,7 +71,7 @@ void RigidBody::calculateDerivedData() {
 }
 
 void RigidBody::integrate(real duration) {
-    if (!isAwake) {
+    if (!awakeTime) {
         return;
     }
 
@@ -143,20 +107,19 @@ void RigidBody::integrate(real duration) {
     // Clear accumulators.
     clearAccumulators();
 
-    // Update the kinetic energy store, and possibly put the body to
-    // sleep.
-    if (canSleep) {
-        real currentMotion = velocity.scalarProduct(velocity) + rotation.scalarProduct(rotation);
+    // Update the kinetic energy store, and possibly put the body to sleep.
+    //if (canSleep) {
+    //    real currentMotion = velocity.scalarProduct(velocity) + rotation.scalarProduct(rotation);
 
-        real bias = real_pow(0.5, duration);
-        motion = bias*motion + (1 - bias)*currentMotion;
+    //    real bias = real_pow(0.5, duration);
+    //    motion = bias*motion + (1 - bias)*currentMotion;
 
-        if (motion < sleepEpsilon) {
-            setAwake(false);
-        } else if (motion > 10 * sleepEpsilon) {
-            motion = 10 * sleepEpsilon;
-        }
-    }
+    //    if (motion < sleepEpsilon) {
+    //        setAwake(false);
+    //    } else if (motion > 10 * sleepEpsilon) {
+    //        motion = 10 * sleepEpsilon;
+    //    }
+    //}
 }
 
 void RigidBody::setMass(const real mass) {
@@ -366,13 +329,11 @@ void RigidBody::addRotation(const Vector3 &deltaRotation) {
     rotation += deltaRotation;
 }
 
-void RigidBody::getLastFrameAcceleration(Vector3 *acceleration) const
-{
+void RigidBody::getLastFrameAcceleration(Vector3 *acceleration) const {
     *acceleration = lastFrameAcceleration;
 }
 
-Vector3 RigidBody::getLastFrameAcceleration() const
-{
+Vector3 RigidBody::getLastFrameAcceleration() const {
     return lastFrameAcceleration;
 }
 
@@ -383,7 +344,6 @@ void RigidBody::clearAccumulators() {
 
 void RigidBody::addForce(const Vector3 &force) {
     forceAccum += force;
-    isAwake = true;
 }
 
 void RigidBody::addForceAtBodyPoint(const Vector3 &force, const Vector3 &point) {
@@ -400,13 +360,10 @@ void RigidBody::addForceAtPoint(const Vector3 &force, const Vector3 &point) {
 
     forceAccum += force;
     torqueAccum += pt % force;
-
-    isAwake = true;
 }
 
 void RigidBody::addTorque(const Vector3 &torque) {
     torqueAccum += torque;
-    isAwake = true;
 }
 
 void RigidBody::setAcceleration(const Vector3 &acceleration) {
@@ -463,30 +420,27 @@ Matrix4 RigidBody::getTransform() const {
     return transformMatrix;
 }
 
-bool RigidBody::getAwake() const {
-    return isAwake;
+double RigidBody::getAwakeTime() const {
+    return awakeTime;
 }
 
-void RigidBody::setAwake(const bool awake) {
-    if (awake) {
-        isAwake = true;
-
+void RigidBody::setAwakeTime(const double awakeTime) {
+    this->awakeTime = awakeTime;
+    if (awakeTime) {
         // Add a bit of motion to avoid it falling asleep immediately.
-        motion = sleepEpsilon*2.0f;
-    }
-    else {
-        isAwake = false;
+        //motion = sleepEpsilon*2.0f;
+    } else {
         velocity.clear();
         rotation.clear();
     }
 }
 
-bool RigidBody::getCanSleep() const {
-    return canSleep;
-}
-
-void RigidBody::setCanSleep(const bool canSleep) {
-    RigidBody::canSleep = canSleep;
-
-    if (!canSleep && !isAwake) setAwake();
-}
+//bool RigidBody::getCanSleep() const {
+//    return canSleep;
+//}
+//
+//void RigidBody::setCanSleep(const bool canSleep) {
+//    RigidBody::canSleep = canSleep;
+//
+//    if (!canSleep && !isAwake) setAwake();
+//}

@@ -12,10 +12,12 @@
 
 #include "tutorial1.hpp"
 #include "tutorial2.hpp"
+#include "tutorial3.hpp"
 
 int main(void) {
     //auto app = Tutorial1::Create();
-    auto app = Tutorial2::Create();
+    //auto app = Tutorial2::Create();
+    auto app = Tutorial3::Create();
     app->run();
     delete app;
 }

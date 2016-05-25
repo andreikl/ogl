@@ -1,5 +1,3 @@
-#include <vector>
-
 class Application;
 class RigidBody;
 

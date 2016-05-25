@@ -162,13 +162,13 @@ public:
 // Rigid body integration
 public:
     // Returns true if the body is awake and responding to integration.
-    bool getAwake() const;
+    double getAwakeTime() const;
     // Sets the awake state of the body
-    void setAwake(const bool awake = true);
+    void setAwakeTime(const double awakeTime);
     // Returns true if the body is allowed to go to sleep at any time.
-    bool getCanSleep() const;
+    //bool getCanSleep() const;
     // Sets whether the body is ever allowed to go to sleep.
-    void setCanSleep(const bool canSleep = true);
+    //void setCanSleep(const bool canSleep = true);
 
 // Variety of Vertices
 protected:
@@ -212,9 +212,10 @@ protected:
     // Holds the amount of motion of the body.
     real motion;
     // A body can be put to sleep to avoid it being updated
-    bool isAwake;
+    double awakeTime;
+
     // Some bodies may never be allowed to fall asleep.
-    bool canSleep;
+    // bool canSleep;
     // Holds a transform matrix for converting body space into world space and vice versa.
     Matrix4 transformMatrix;
 };

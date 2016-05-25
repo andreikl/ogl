@@ -43,7 +43,8 @@ protected:
 protected:
     // draws app
     virtual void draw() = 0;
-    // handles key
+    // handles keyboard and mouse
+    virtual void handleButton(int button, int action, int mods) = 0;
     virtual void handleKey(int key, int scancode, int action, int mods) = 0;
     // Sets up the application
     virtual void initOpenGl();

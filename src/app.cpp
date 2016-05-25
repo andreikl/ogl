@@ -183,6 +183,10 @@ void Application::initApplication() {
         that->handleKey(key, scancode, action, mods);
         //std::cout << "key pressed: " << key << std::endl;
     });
+    glfwSetMouseButtonCallback(this->window, [](GLFWwindow* window, int button, int action, int mods) -> void {
+        that->handleButton(button, action, mods);
+        //std::cout << button << " " << action << " " << mods << std::endl;
+    });
 }
 
 void Application::initWorld() {

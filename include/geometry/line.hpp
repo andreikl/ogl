@@ -1,12 +1,12 @@
-class RigidBody;
 class Application;
+class RigidBody;
 
-class Grid: RigidBody {
+class Line: RigidBody {
 // constructors and destructors
 public:
-    Grid();
-    ~Grid();
-    static RigidBody* Create(int columns = 100, int rows = 100);
+    Line();
+    ~Line();
+    static RigidBody* Create();
 
 public:
     void virtual init();

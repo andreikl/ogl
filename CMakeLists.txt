@@ -56,11 +56,17 @@ add_executable(ogl
     src/geometry/grid.cpp
     src/geometry/sphere.cpp
     src/geometry/cube.cpp
+    src/geometry/line.cpp
 
     src/tutorial1.cpp
     src/tutorial2.cpp
+    src/tutorial3.cpp
     src/SimpleTransform.vertexshader
     src/SingleColor.fragmentshader
+    src/SimpleTransform.vertexshader
+    src/SingleColor.fragmentshader
+    src/TextVertexShader.fragmentshader
+    src/TextVertexShader.vertexshader
 )
 
 target_link_libraries(ogl

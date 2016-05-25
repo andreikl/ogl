@@ -17,9 +17,9 @@
 #include "tutorial1.hpp"
 
 Application* Tutorial1::Create() {
-    auto tutorial1 = new Tutorial1();
-    tutorial1->init();
-    return tutorial1;
+    auto app = new Tutorial1();
+    app->init();
+    return app;
 }
 
 void Tutorial1::initWorld() {
@@ -30,6 +30,9 @@ void Tutorial1::initWorld() {
 }
 
 void Tutorial1::handleKey(int key, int scancode, int action, int mods) {
+}
+
+void Tutorial1::handleButton(int button, int action, int mods) {
 }
 
 void Tutorial1::draw() {

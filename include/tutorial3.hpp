@@ -1,8 +1,10 @@
+#include <vector>
+
 class Application;
 class RigidBody;
 
-// shows sphere and provides orbit mouse input
-class Tutorial1 : Application {
+// ballistic demo
+class Tutorial3 : Application {
 public:
     static Application* Create();
 
@@ -16,5 +18,7 @@ protected:
     virtual void dispose();
 
 private:
-    RigidBody* body;
+    std::vector<RigidBody*> rays;
+    RigidBody* dice;
+    RigidBody* grid;
 };
