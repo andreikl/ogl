@@ -52,7 +52,7 @@ void Tutorial3::handleKey(int key, int scancode, int action, int mods) {
 void Tutorial3::handleButton(int button, int action, int mods) {
     if (button == GLFW_MOUSE_BUTTON_1 && action == GLFW_RELEASE) {
         this->startTime = glfwGetTime();
-        for (auto& ray : rays) {
+        for (auto& ray: rays) {
             if (!ray->getAwakeTime()) {
                 ray->setAwakeTime(glfwGetTime());
                 break;

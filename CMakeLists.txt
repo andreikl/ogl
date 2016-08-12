@@ -61,6 +61,7 @@ add_executable(ogl
     src/tutorial1.cpp
     src/tutorial2.cpp
     src/tutorial3.cpp
+    src/tutorial4.cpp
     src/SimpleTransform.vertexshader
     src/SingleColor.fragmentshader
     src/SimpleTransform.vertexshader
