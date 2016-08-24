@@ -9,7 +9,6 @@ if(POLICY CMP0020)
 cmake_policy(SET CMP0020 OLD)
 endif()
 
-# test
 # q5 instruction
 # Find the Qt5Core library
 # example of CMAKE_MODULE_PATH
