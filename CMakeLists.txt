@@ -4,6 +4,11 @@ project (ogl)
 
 find_package(OpenGL REQUIRED)
 
+# to suppress POLICY CMP0020 warning:
+if(POLICY CMP0020)
+cmake_policy(SET CMP0020 OLD)
+endif()
+
 # q5 instruction
 # Find the Qt5Core library
 # example of CMAKE_MODULE_PATH
@@ -20,6 +25,7 @@ message( "CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}" )
 message( "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}" )
 message( "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}" )
 message( "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}" )
+message( "_qt5Widgets_install_prefix: ${_qt5Widgets_install_prefix}" )
 
 if( CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR )
     message( FATAL_ERROR "Please select another Build Directory." )
@@ -101,3 +107,18 @@ set_target_properties(ogl PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${
 create_target_launcher(ogl WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
 SOURCE_GROUP(shaders REGULAR_EXPRESSION ".*/.*shader$" )
+
+add_custom_command(TARGET ogl POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different # which executes "cmake - E copy_if_different..."
+        "${_qt5Widgets_install_prefix}/bin/Qt5Widgetsd.dll"
+        $<TARGET_FILE_DIR:ogl>)
+
+add_custom_command(TARGET ogl POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different # which executes "cmake - E copy_if_different..."
+        "${_qt5Widgets_install_prefix}/bin/Qt5Cored.dll"
+        $<TARGET_FILE_DIR:ogl>)
+
+add_custom_command(TARGET ogl POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different # which executes "cmake - E copy_if_different..."
+        "${_qt5Widgets_install_prefix}/bin/Qt5Guid.dll"
+        $<TARGET_FILE_DIR:ogl>)
